@@ -4,6 +4,33 @@ set -ex
 unset DRY_RUN
 DATA_DIR=$PWD
 
+update_geojson () {
+    # https://eric.clst.org/tech/usgeojson/
+    cd $DATA_DIR
+    mkdir -p geojson
+    cd geojson
+    urls="https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json
+	https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_5m.json
+	https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_20m.json
+ 	https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_500k.json
+	https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_5m.json
+	https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_20m.json"
+    for url in $urls; do
+	wget --no-verbose --timestamping $url
+    done
+}
+
+update_pm_covid () {
+    # https://github.com/wxwx1993/PM_COVID.git
+    cd $DATA_DIR
+    if [[ -d PM_COVID ]]; then
+	cd PM_COVID
+	git pull
+    else
+	git clone https://github.com/wxwx1993/PM_COVID.git
+    fi
+}
+
 update_nytimes () {
     # https://github.com/nytimes/covid-19-data.git
     cd $DATA_DIR
@@ -81,10 +108,12 @@ update_covid_tracking () {
 }
 
 update_data () {
-    update_covid_tracking
-    update_cord_19
-    update_litcovid
-    update_nytimes
+#    update_covid_tracking
+#    update_cord_19
+#    update_litcovid
+#    update_nytimes
+    update_geojson
+    update_pm_covid
 }
 
 update_data
