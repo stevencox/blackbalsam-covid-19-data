@@ -14,7 +14,7 @@ The [New York Times COVID-19](https://github.com/nytimes/covid-19-data) GitHub d
 The [COVID-19 and Particulate Matter link](https://projects.iq.harvard.edu/covid-pm/home) and related [analytics](https://github.com/wxwx1993/PM_COVID)
 
 ### GeoJSON
-Choropleth bounaries at the state and county level at multiple resolutions.
+Choropleth boundaries at the state and county level at multiple resolutions.
 
 See the `update` script for details of current data sets. Submit a pull request to add a data set.
 
