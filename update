@@ -108,10 +108,10 @@ update_covid_tracking () {
 }
 
 update_data () {
-#    update_covid_tracking
-#    update_cord_19
-#    update_litcovid
-#    update_nytimes
+    update_covid_tracking
+    update_cord_19
+    update_litcovid
+    update_nytimes
     update_geojson
     update_pm_covid
 }
