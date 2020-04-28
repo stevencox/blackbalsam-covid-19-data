@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -ex
+
+update_data () {
+    local data_root=$1
+    cd $data_root
+    wget 
+}
+
+$*
+
+exit 0
