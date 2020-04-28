@@ -1,13 +1,92 @@
 #!/bin/bash
 
 set -ex
+unset DRY_RUN
+DATA_DIR=$PWD
 
-update_data () {
-    local data_root=$1
-    cd $data_root
-    wget 
+update_nytimes () {
+    # https://github.com/nytimes/covid-19-data.git
+    cd $DATA_DIR
+    mkdir -p nytimes
+    cd nytimes
+    if [[ -d covid-19-data ]]; then
+	cd covid-19-data
+	git pull
+    else
+	git clone https://github.com/nytimes/covid-19-data.git
+    fi
+}
+    
+update_litcovid () {
+    # litcovid https://www.ncbi.nlm.nih.gov/research/pubtator/index.html?view=docsum&query=$LitCovid
+    cd $DATA_DIR
+    mkdir -p litcovid
+    cd litcovid
+    urls="https://ftp.ncbi.nlm.nih.gov/pub/lu/LitCovid/litcovid2BioCJSON.gz
+	https://ftp.ncbi.nlm.nih.gov/pub/lu/LitCovid/litcovid2pubtator.gz"
+    for url in $urls; do	
+	wget --timestamping --no-verbose $url
+	if [ $DRY_RUN ]; then
+	    break
+	fi
+    done
 }
 
-$*
+update_cord_19 () {
+    # cord-19 https://www.semanticscholar.org/cord19
+    cd $DATA_DIR
+    mkdir -p cord-19
+    cd cord-19
+    urls="https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/latest/metadata.csv
+	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/latest/comm_use_subset.tar.gz
+    	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/latest/noncomm_use_subset.tar.gz
+    	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/latest/custom_license.tar.gz
+    	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/latest/biorxiv_medrxiv.tar.gz
+    	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-03-13/all_sources_metadata_2020-03-13.readme
+    	https://github.com/microsoft/mag-covid19-research-examples/blob/master/src/data/2020-04-17-CORD-19-MappedTo-2020-04-10-MAG-Backfill.csv
+    	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/latest/cord_19_embeddings_4_24.tar.gz
+    	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/antiviral_with_properties.sdf.gz
+    	https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/candidate_compounts.readme"
+    for url in $urls; do	
+	wget --timestamping --no-verbose $url
+	if [ $DRY_RUN ]; then
+	    break
+	fi
+    done
+}
+
+update_covid_tracking () {
+    # covid tracking: https://covidtracking.com/api
+    cd $DATA_DIR
+    mkdir -p covid-tracking
+    cd covid-tracking
+    urls="https://covidtracking.com/api/v1/states/current
+	https://covidtracking.com/api/v1/states/daily
+	https://covidtracking.com/api/v1/states/info
+	https://covidtracking.com/api/v1/us/current
+	https://covidtracking.com/api/v1/us/daily
+	https://covidtracking.com/api/v1/counties
+	https://covidtracking.com/api/v1/urls
+	https://covidtracking.com/api/v1/states/screenshots
+	https://covidtracking.com/api/v1/press"
+    for url in $urls; do
+	for format in json csv; do
+	    echo getting $url.$format
+	    wget --timestamping --no-verbose $url.$format
+	done
+	if [ $DRY_RUN ]; then
+	    break
+	fi
+    done
+}
+
+update_data () {
+    update_covid_tracking
+    update_cord_19
+    update_litcovid
+    update_nytimes
+}
+
+update_data
 
 exit 0
