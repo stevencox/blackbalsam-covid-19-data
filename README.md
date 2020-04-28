@@ -63,4 +63,4 @@ data/
 |   `-- litcovid2pubtator.gz
 `-- nytimes
     `-- covid-19-data
-    ```
+```
