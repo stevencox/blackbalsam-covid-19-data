@@ -5,17 +5,16 @@ This repository defined the COVID-19 data set for the [Blackbalsam](https://gith
 More data sets will be added soon. The ones below exist in the `/home/shared` directory mounted to each Jupyter notebook.
 
 ### CORD-19 Dataset
-The [CORD-19 Open Research Data Set](https://www.semanticscholar.org/cord19/download) is at `/home/shared/data/cord19`
+The [CORD-19 Open Research Data Set](https://www.semanticscholar.org/cord19/download)
 
 ### New York Times
-The [New York Times COVID-19](https://github.com/nytimes/covid-19-data) GitHub data set is at `/home/shared/data/nytimes/covid-19-data`
+The [New York Times COVID-19](https://github.com/nytimes/covid-19-data) GitHub data set 
 
 ### PM_COVID
-The [COVID-19 and Particulate Matter link](https://projects.iq.harvard.edu/covid-pm/home) and related [analytics](https://github.com/wxwx1993/PM_COVID) are at `/home/shared/data/PM_COVID`.
+The [COVID-19 and Particulate Matter link](https://projects.iq.harvard.edu/covid-pm/home) and related [analytics](https://github.com/wxwx1993/PM_COVID)
 
 ### GeoJSON
 Choropleth bounaries at the state and county level at multiple resolutions.
-
 
 See the `update` script for details of current data sets. Submit a pull request to add a data set.
 
