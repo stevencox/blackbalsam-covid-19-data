@@ -40,16 +40,6 @@ data/
 |   |-- custom_license.tar.gz
 |   |-- metadata.csv
 |   `-- noncomm_use_subset.tar.gz
-|-- cord19
-|   |-- all_sources_metadata_2020-03-13.readme
-|   |-- antiviral_with_properties.sdf.gz
-|   |-- biorxiv_medrxiv.tar.gz
-|   |-- candidate_compounts.readme
-|   |-- comm_use_subset.tar.gz
-|   |-- cord_19_embeddings_4_24.tar.gz
-|   |-- custom_license.tar.gz
-|   |-- metadata.csv
-|   `-- noncomm_use_subset.tar.gz
 |-- covid-tracking
 |   |-- counties.csv
 |   |-- counties.json
