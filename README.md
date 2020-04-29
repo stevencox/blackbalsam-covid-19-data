@@ -19,6 +19,7 @@ Choropleth boundaries at the state and county level at multiple resolutions.
 See the `update` script for details of current data sets. Submit a pull request to add a data set.
 
 ```
+# tree -L 2 data/
 data/
 |-- PM_COVID
 |   |-- Analyses.R
